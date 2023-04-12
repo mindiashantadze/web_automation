@@ -1,0 +1,9 @@
+[2023-04-12 12:57:57] [29] [WARN] Reporting disabled: using no op test run registrar
+[2023-04-12 12:57:57] [29] [INFO] TEST [Search - noProductsFoundTest] STARTED at [16:57:57 2023-04-12]
+[2023-04-12 12:57:57] [29] [INFO] Starting driver session...
+[2023-04-12 12:57:57] [29] [WARN] If you want to enable auto-download for FF please specify 'auto_download_apps' param
+[2023-04-12 12:58:05] [29] [INFO] Driver session started.
+[2023-04-12 12:58:06] [29] [INFO] INFO: opening url 'https://www.ebay.com/'
+[2023-04-12 12:58:12] [29] [INFO] PASS: keys 'somenonexistingproduct' are sent to element 'inptSearchField'.
+[2023-04-12 12:58:16] [29] [INFO] PASS: element 'btnSearchProducts' is clicked.
+[2023-04-12 12:58:16] [29] [INFO] TEST [Search - noProductsFoundTest] PASSED at [16:58:16 2023-04-12]

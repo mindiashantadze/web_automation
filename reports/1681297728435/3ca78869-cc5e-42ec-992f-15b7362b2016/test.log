@@ -1,0 +1,10 @@
+[2023-04-12 11:10:03] [28] [WARN] Reporting disabled: using no op test run registrar
+[2023-04-12 11:10:03] [28] [INFO] TEST [Search - searchWithCategoriesTest] STARTED at [15:10:03 2023-04-12]
+[2023-04-12 11:10:04] [28] [INFO] Starting driver session...
+[2023-04-12 11:10:09] [28] [INFO] Driver session started.
+[2023-04-12 11:10:09] [28] [INFO] INFO: opening url 'https://www.ebay.com/'
+[2023-04-12 11:10:16] [28] [INFO] PASS: keys 'Ball' are sent to element 'inptSearchField'.
+[2023-04-12 11:10:21] [28] [INFO] PASS: element 'categoriesDropDown' is clicked.
+[2023-04-12 11:10:22] [28] [INFO] PASS: element 'By.xpath: //select[@id = 'gh-cat']/option[text() = 'Music']' is clicked.
+[2023-04-12 11:10:32] [28] [INFO] PASS: element 'btnSearchProducts' is clicked.
+[2023-04-12 11:10:34] [28] [INFO] TEST [Search - searchWithCategoriesTest] PASSED at [15:10:34 2023-04-12]

@@ -1,0 +1,7 @@
+[2023-04-12 10:46:30] [23] [WARN] Reporting disabled: using no op test run registrar
+[2023-04-12 10:46:30] [23] [INFO] TEST [Search - emptySearchTest] STARTED at [14:46:30 2023-04-12]
+[2023-04-12 10:46:30] [23] [INFO] Starting driver session...
+[2023-04-12 10:46:39] [23] [INFO] Driver session started.
+[2023-04-12 10:46:40] [23] [INFO] INFO: opening url 'https://www.ebay.com/'
+[2023-04-12 10:47:16] [23] [INFO] PASS: element 'btnSearchProducts' is clicked.
+[2023-04-12 10:47:19] [23] [INFO] TEST [Search - emptySearchTest] PASSED at [14:47:19 2023-04-12]

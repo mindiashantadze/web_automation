@@ -1,0 +1,30 @@
+[2023-04-12 10:46:30] [24] [WARN] Reporting disabled: using no op test run registrar
+[2023-04-12 10:46:30] [24] [INFO] TEST [Search - excludeProductsTest] STARTED at [14:46:30 2023-04-12]
+[2023-04-12 10:46:30] [24] [INFO] Starting driver session...
+[2023-04-12 10:46:39] [24] [INFO] Driver session started.
+[2023-04-12 10:46:40] [24] [INFO] INFO: opening url 'https://www.ebay.com/'
+[2023-04-12 10:46:54] [24] [INFO] PASS: element 'advancedBtn' is clicked.
+[2023-04-12 10:47:01] [24] [INFO] PASS: keys 'Ball' are sent to element 'inptIncludedWords'.
+[2023-04-12 10:47:02] [24] [INFO] PASS: keys 'Disco' are sent to element 'inptExcludedWords'.
+[2023-04-12 10:47:14] [24] [INFO] PASS: element 'submitBtn' is clicked.
+[2023-04-12 10:47:28] [24] [INFO] Polystyrene Ball **ALL SIZES** 20MM to 290MM Syrofoam DIY FAST&FREE UK Stock NEW
+[2023-04-12 10:47:31] [24] [ERROR] TEST [Search - excludeProductsTest] FAILED at [14:47:31 2023-04-12] - Expected product to contain Balland not contain Disco, but the result was Polystyrene Ball **ALL SIZES** 20MM to 290MM Syrofoam DIY FAST&FREE UK Stock NEW expected [true] but found [false]
+
+org.testng.Assert.fail(Assert.java:110)
+org.testng.Assert.failNotEquals(Assert.java:1413)
+org.testng.Assert.assertTrue(Assert.java:56)
+ebay.carina.pages.ProductListingPage.validateProductName(ProductListingPage.java:44)
+ebay.carina.SearchTest.excludeProductsTest(SearchTest.java:79)
+java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+java.base/java.lang.reflect.Method.invoke(Method.java:577)
+org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:677)
+org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:221)
+org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:962)
+org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:194)
+org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+java.base/java.lang.Thread.run(Thread.java:833)

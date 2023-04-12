@@ -1,0 +1,8 @@
+[2023-04-12 12:57:57] [26] [WARN] Reporting disabled: using no op test run registrar
+[2023-04-12 12:57:57] [26] [INFO] TEST [Search - emptySearchTest] STARTED at [16:57:57 2023-04-12]
+[2023-04-12 12:57:57] [26] [INFO] Starting driver session...
+[2023-04-12 12:57:57] [26] [WARN] If you want to enable auto-download for FF please specify 'auto_download_apps' param
+[2023-04-12 12:58:05] [26] [INFO] Driver session started.
+[2023-04-12 12:58:06] [26] [INFO] INFO: opening url 'https://www.ebay.com/'
+[2023-04-12 12:58:14] [26] [INFO] PASS: element 'btnSearchProducts' is clicked.
+[2023-04-12 12:58:15] [26] [INFO] TEST [Search - emptySearchTest] PASSED at [16:58:15 2023-04-12]

@@ -1,0 +1,31 @@
+[2023-04-12 12:59:13] [1] [INFO] 
+============= Test configuration =============
+url=https://www.ebay.com/
+env=DEMO
+selenium_url=http://localhost:4444/wd/hub
+auto_screenshot=true
+project_report_directory=./reports
+max_screen_history=10
+localization_encoding=UTF-8
+language=en_US
+selenium_url=http://localhost:4444/wd/hub
+
+------------- Driver capabilities -----------
+capabilities.browserName=chrome
+================================================
+
+[2023-04-12 12:59:13] [1] [WARN] Reporting disabled: using no op test run registrar
+[2023-04-12 12:59:15] [1] [INFO] [TestNG] Running:
+  /Users/mindiashantadze/dev/task1_selenium/carina_automation/src/test/resources/testng_suites/search.xml
+
+[2023-04-12 12:59:15] [1] [INFO] Use thread-count='5' from suite file.
+[2023-04-12 12:59:15] [1] [INFO] Set data-provider-thread-count=1
+[2023-04-12 12:59:15] [1] [INFO] CARINA_CORE_VERSION: 8.0.9
+[2023-04-12 01:00:51] [1] [INFO] INFO: '**************** Test execution summary ****************'.
+[2023-04-12 01:00:51] [1] [INFO] RESULT #1: TEST [Search - emptySearchTest] PASS [screenshots=file:///Users/mindiashantadze/dev/task1_selenium/carina_automation/./reports/1681304353571/14abd268-98a2-475e-8762-098ac9c822c9/report.html | log=file:///Users/mindiashantadze/dev/task1_selenium/carina_automation/./reports/1681304353571/14abd268-98a2-475e-8762-098ac9c822c9/test.log]
+[2023-04-12 01:00:51] [1] [INFO] RESULT #2: TEST [Search - noProductsFoundTest] PASS [screenshots=file:///Users/mindiashantadze/dev/task1_selenium/carina_automation/./reports/1681304353571/e4f4c739-333e-4c14-8925-70c7e424e2d8/report.html | log=file:///Users/mindiashantadze/dev/task1_selenium/carina_automation/./reports/1681304353571/e4f4c739-333e-4c14-8925-70c7e424e2d8/test.log]
+[2023-04-12 01:00:51] [1] [INFO] RESULT #3: TEST [Search - excludeProductsTest] FAIL [screenshots=file:///Users/mindiashantadze/dev/task1_selenium/carina_automation/./reports/1681304353571/1e24c92b-52a8-4575-af1d-f223405913fb/report.html | log=file:///Users/mindiashantadze/dev/task1_selenium/carina_automation/./reports/1681304353571/1e24c92b-52a8-4575-af1d-f223405913fb/test.log]
+[2023-04-12 01:00:51] [1] [INFO] RESULT #4: TEST [Search - includeExactWordsTest] FAIL [screenshots=file:///Users/mindiashantadze/dev/task1_selenium/carina_automation/./reports/1681304353571/4698ce56-2156-41ed-b694-4535a3a68660/report.html | log=file:///Users/mindiashantadze/dev/task1_selenium/carina_automation/./reports/1681304353571/4698ce56-2156-41ed-b694-4535a3a68660/test.log]
+[2023-04-12 01:00:51] [1] [INFO] RESULT #5: TEST [Search - searchByProductRangeTest] FAIL [screenshots=file:///Users/mindiashantadze/dev/task1_selenium/carina_automation/./reports/1681304353571/8b39b39f-31ff-4a03-8a9c-d34204b6c0a8/report.html | log=file:///Users/mindiashantadze/dev/task1_selenium/carina_automation/./reports/1681304353571/8b39b39f-31ff-4a03-8a9c-d34204b6c0a8/test.log]
+[2023-04-12 01:00:51] [1] [INFO] RESULT #6: TEST [Search - searchTest] FAIL [screenshots=file:///Users/mindiashantadze/dev/task1_selenium/carina_automation/./reports/1681304353571/03403699-1a9b-4239-9831-96f588e7e411/report.html | log=file:///Users/mindiashantadze/dev/task1_selenium/carina_automation/./reports/1681304353571/03403699-1a9b-4239-9831-96f588e7e411/test.log]
+[2023-04-12 01:00:51] [1] [INFO] RESULT #7: TEST [Search - searchWithCategoriesTest] PASS [screenshots=file:///Users/mindiashantadze/dev/task1_selenium/carina_automation/./reports/1681304353571/834bb9ac-52d3-4b54-b3ec-e2b10ba93b87/report.html | log=file:///Users/mindiashantadze/dev/task1_selenium/carina_automation/./reports/1681304353571/834bb9ac-52d3-4b54-b3ec-e2b10ba93b87/test.log]
