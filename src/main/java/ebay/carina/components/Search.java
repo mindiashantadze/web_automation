@@ -21,6 +21,9 @@ public class Search extends AbstractUIObject {
     @FindBy(id = "gh-as-a")
     ExtendedWebElement advancedBtn;
 
+    @FindBy(xpath = "//select[@id = 'gh-cat']/option[text() = '%s']")
+    ExtendedWebElement categoryOption;
+
     public Search(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
     }
@@ -35,8 +38,7 @@ public class Search extends AbstractUIObject {
 
     public void selectCategory(String categoryName) {
         categoriesDropDown.click();
-        ExtendedWebElement categoryOption = findExtendedWebElement(By.xpath(String.format("//select[@id = 'gh-cat']/option[text() = '%s']", categoryName)));
-        categoryOption.click();
+        categoryOption.format(categoryName).click();
     }
 
     public AdvancedSearchPage goToAdvancedSearchPage() {

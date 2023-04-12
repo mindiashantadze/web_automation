@@ -1,8 +1,0 @@
-[2023-04-12 11:09:41] [26] [WARN] Reporting disabled: using no op test run registrar
-[2023-04-12 11:09:41] [26] [INFO] TEST [Search - searchTest] STARTED at [15:09:41 2023-04-12]
-[2023-04-12 11:09:41] [26] [INFO] Starting driver session...
-[2023-04-12 11:09:46] [26] [INFO] Driver session started.
-[2023-04-12 11:09:46] [26] [INFO] INFO: opening url 'https://www.ebay.com/'
-[2023-04-12 11:09:55] [26] [INFO] PASS: keys 'Ball' are sent to element 'inptSearchField'.
-[2023-04-12 11:10:09] [26] [INFO] PASS: element 'btnSearchProducts' is clicked.
-[2023-04-12 11:10:10] [26] [INFO] TEST [Search - searchTest] PASSED at [15:10:10 2023-04-12]
