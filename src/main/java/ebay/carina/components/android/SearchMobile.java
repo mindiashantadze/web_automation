@@ -1,18 +1,18 @@
-package ebay.carina.components;
+package ebay.carina.components.android;
 
+import com.zebrunner.carina.utils.factory.ICustomTypePageFactory;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
-import com.zebrunner.carina.webdriver.gui.AbstractUIObject;
-import ebay.carina.pages.AdvancedSearchPage;
-import org.openqa.selenium.By;
+import ebay.carina.components.common.SearchBase;
+import ebay.carina.pages.common.AdvancedSearchPageBase;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
-public class Search extends AbstractUIObject {
-    @FindBy(id = "gh-ac")
+public class SearchMobile extends SearchBase implements ICustomTypePageFactory {
+    @FindBy(xpath = "//input[@name='_nkw']")
     ExtendedWebElement inptSearchField;
 
-    @FindBy(id = "gh-btn")
+    @FindBy(className = "gh-search__submitbtn")
     ExtendedWebElement btnSearchProducts;
 
     @FindBy(id = "gh-cat-box")
@@ -24,25 +24,29 @@ public class Search extends AbstractUIObject {
     @FindBy(xpath = "//select[@id = 'gh-cat']/option[text() = '%s']")
     ExtendedWebElement categoryOption;
 
-    public Search(WebDriver driver, SearchContext searchContext) {
+    public SearchMobile(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
+        setUiLoadedMarker(inptSearchField);
     }
 
+    @Override
     public void typeInSearchField(String productName) {
         inptSearchField.type(productName);
     }
 
+    @Override
     public void clickSearchButton() {
         btnSearchProducts.click();
     }
 
+    @Override
     public void selectCategory(String categoryName) {
         categoriesDropDown.click();
         categoryOption.format(categoryName).click();
     }
 
-    public AdvancedSearchPage goToAdvancedSearchPage() {
-        advancedBtn.click();
-        return new AdvancedSearchPage(driver);
+    @Override
+    public AdvancedSearchPageBase goToAdvancedSearchPage() {
+        return null;
     }
 }

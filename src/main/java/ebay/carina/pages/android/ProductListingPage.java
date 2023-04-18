@@ -1,7 +1,8 @@
-package ebay.carina.pages;
+package ebay.carina.pages.android;
 
+import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
-import com.zebrunner.carina.webdriver.gui.AbstractPage;
+import ebay.carina.pages.common.ProductListingPageBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
@@ -13,7 +14,8 @@ import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.List;
 
-public class ProductListingPage extends AbstractPage {
+@DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = ProductListingPageBase.class)
+public class ProductListingPage extends ProductListingPageBase {
     private final static Logger LOGGER = LoggerFactory.getLogger(ProductListingPage.class);
 
     @FindBy(xpath = "//div[@id = 'srp-river-results']//span[@role = 'heading']")

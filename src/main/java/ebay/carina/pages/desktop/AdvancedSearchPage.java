@@ -1,15 +1,18 @@
-package ebay.carina.pages;
+package ebay.carina.pages.desktop;
 
+import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
-import com.zebrunner.carina.webdriver.gui.AbstractPage;
 import ebay.carina.locatorenums.KeyWordOptions;
+import ebay.carina.pages.common.AdvancedSearchPageBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 import java.math.BigDecimal;
 
-public class AdvancedSearchPage extends AbstractPage {
+
+@DeviceType(pageType = DeviceType.Type.DESKTOP, parentClass = AdvancedSearchPageBase.class)
+public class AdvancedSearchPage extends AdvancedSearchPageBase {
     @FindBy(id = "_nkw")
     ExtendedWebElement inptIncludedWords;
 
