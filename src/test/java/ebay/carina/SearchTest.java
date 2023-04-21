@@ -1,13 +1,8 @@
 package ebay.carina;
 
 import com.qaprosoft.carina.core.foundation.IAbstractTest;
-import com.zebrunner.agent.core.annotation.TestLabel;
-import com.zebrunner.carina.utils.factory.ICustomTypePageFactory;
-import ebay.carina.locatorenums.KeyWordOptions;
-import ebay.carina.pages.common.AdvancedSearchPageBase;
-import ebay.carina.pages.common.HomePageBase;
-import ebay.carina.pages.common.CategoriesPageBase;
-import ebay.carina.pages.common.ProductListingPageBase;
+import ebay.carina.locatorenums.SortOptions;
+import ebay.carina.pages.common.*;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,10 +14,11 @@ import java.util.List;
 
 public class SearchTest implements IAbstractTest {
     private static final Logger LOGGER = LoggerFactory.getLogger(SearchTest.class);
-    private final static String CATEGORIES_TITLE = "All Categories";
+
+    private static final String SIGNIN_PAGE_MSG = "Sign in to eBay or create an account";
     private final static String PRODUCTS_NOT_FOUND_MSG = "No exact matches found";
 
-    @Test(groups = {"desktop", "android"})
+    @Test
     public void searchTest() {
         WebDriver driver = getDriver();
         HomePageBase homePage = initPage(driver, HomePageBase.class);
@@ -33,18 +29,19 @@ public class SearchTest implements IAbstractTest {
         plp.validateProductName("Ball");
     }
 
-    @Test(groups = {"desktop"})
-    public void emptySearchTest() {
+    @Test
+    public void saveSearchTest() {
         WebDriver driver = getDriver();
         HomePageBase homePage = initPage(driver, HomePageBase.class);
         homePage.open();
+        homePage.getSearchSection().typeInSearchField("Ball");
         homePage.getSearchSection().clickSearchButton();
-        CategoriesPageBase categoriesPage = initPage(driver, CategoriesPageBase.class);
-        Assert.assertEquals(categoriesPage.getCategoriesTitle(), CATEGORIES_TITLE, "Element should have text \"All Categories\"");
-        Assert.assertTrue(driver.getCurrentUrl().contains("all-categories"), "url should contain all-categories");
+        ProductListingPageBase plp = initPage(driver, ProductListingPageBase.class);
+        LoginPageBase loginPage = plp.clickSaveSearch();
+        Assert.assertEquals(loginPage.getSignInMessage(), SIGNIN_PAGE_MSG);
     }
 
-    @Test(groups = {"desktop", "android"})
+    @Test
     public void noProductsFoundTest() {
         WebDriver driver = getDriver();
         HomePageBase homePage = initPage(driver, HomePageBase.class);
@@ -55,7 +52,7 @@ public class SearchTest implements IAbstractTest {
         Assert.assertEquals(plp.getNoProductFoundLbl(), PRODUCTS_NOT_FOUND_MSG, "Message should say that no matches were found");
     }
 
-    @Test(groups = {"desktop"})
+    @Test
     public void searchWithCategoriesTest() {
         WebDriver driver = getDriver();
         HomePageBase homePage = initPage(driver, HomePageBase.class);
@@ -65,55 +62,58 @@ public class SearchTest implements IAbstractTest {
         homePage.getSearchSection().selectCategory(category);
         homePage.getSearchSection().clickSearchButton();
         ProductListingPageBase plp = initPage(driver, ProductListingPageBase.class);
-        Assert.assertTrue(plp.isCategoryActive(category));
+        Assert.assertTrue(plp.isCategoryActive(category), "Category is not active");
     }
 
-    @Test(groups = {"desktop"})
-    public void excludeProductsTest() {
+    @Test
+    public void priceRangeTest() {
         WebDriver driver = getDriver();
         HomePageBase homePage = initPage(driver, HomePageBase.class);
         homePage.open();
-        AdvancedSearchPageBase advancedSearchPage = homePage.getSearchSection().goToAdvancedSearchPage();
-        advancedSearchPage.typeIncludedWords("Ball");
-        advancedSearchPage.typeExcludedWords("Disco");
-        advancedSearchPage.submitFilter();
+        homePage.getSearchSection().typeInSearchField("Ball");
+        homePage.getSearchSection().clickSearchButton();
         ProductListingPageBase plp = initPage(driver, ProductListingPageBase.class);
-        plp.validateProductName("Ball", "Disco");
-    }
-
-    @Test(groups = {"desktop"})
-    public void includeExactWordsTest() {
-        WebDriver driver = getDriver();
-        HomePageBase homePage = initPage(driver, HomePageBase.class);
-        homePage.open();
-        AdvancedSearchPageBase advancedSearchPage = homePage.getSearchSection().goToAdvancedSearchPage();
-        advancedSearchPage.typeIncludedWords("Disco Ball");
-        advancedSearchPage.selectKeyWordOptions(KeyWordOptions.ExactWordsExactOrder);
-        advancedSearchPage.submitFilter();
-        ProductListingPageBase plp = initPage(driver, ProductListingPageBase.class);
-        plp.validateProductName("disco ball");
-    }
-
-    @Test(groups = {"desktop"})
-    public void searchByProductRangeTest() {
-        WebDriver driver = getDriver();
-        HomePageBase homePage = initPage(driver, HomePageBase.class);
-        homePage.open();
-        AdvancedSearchPageBase advancedSearchPage = homePage.getSearchSection().goToAdvancedSearchPage();
-        advancedSearchPage.typeIncludedWords("Ball");
         BigDecimal enteredMinPrice = new BigDecimal(20);
         BigDecimal enteredMaxPrice = new BigDecimal(50);
-        advancedSearchPage.enterMinPrice(enteredMinPrice);
-        advancedSearchPage.enterMaxPrice(enteredMaxPrice);
-        advancedSearchPage.submitFilter();
-        ProductListingPageBase plp = initPage(driver, ProductListingPageBase.class);
+        plp.getFilter().typeMinPrice(enteredMinPrice);
+        plp.getFilter().typeMaxPrice(enteredMaxPrice);
+        plp.getFilter().submitPriceRange();
         List<BigDecimal> prices = plp.getProductPrices();
         for (BigDecimal price : prices) {
-            LOGGER.info(price.toString());
             Assert.assertTrue(
                     price.compareTo(enteredMinPrice) >= 0 && price.compareTo(enteredMaxPrice) <= 0,
                     "Price should be more than 20 and less than 50. actual price: " + price
             );
         }
+    }
+
+    @Test
+    public void sortingProductsTest() {
+        WebDriver driver = getDriver();
+        HomePageBase homePage = initPage(driver, HomePageBase.class);
+        homePage.open();
+        homePage.getSearchSection().typeInSearchField("Ball");
+        homePage.getSearchSection().clickSearchButton();
+        ProductListingPageBase plp = initPage(driver, ProductListingPageBase.class);
+        plp.selectSortingOption(SortOptions.PriceAsc);
+        List<BigDecimal> prices = plp.getProductPricesWithShipping();
+        for (int i = 1; i < prices.size(); i++) {
+            BigDecimal previousPrice = prices.get(i - 1);
+            BigDecimal price = prices.get(i);
+            Assert.assertTrue(previousPrice.compareTo(price) <= 0, price.toString() + " should be greater than " + previousPrice.toString());
+        };
+    }
+
+    @Test
+    public void freeShippingTest() {
+        WebDriver driver = getDriver();
+        HomePageBase homePage = initPage(driver, HomePageBase.class);
+        homePage.open();
+        homePage.getSearchSection().typeInSearchField("Ball");
+        homePage.getSearchSection().clickSearchButton();
+        ProductListingPageBase plp = initPage(driver, ProductListingPageBase.class);
+        plp.selectFilter("Shipping");
+        plp.selectOption("Free International Shipping");
+        plp.validateFreeShipping();
     }
 }

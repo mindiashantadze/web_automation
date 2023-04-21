@@ -2,6 +2,10 @@ package ebay.carina.pages.android;
 
 import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
+import com.zebrunner.carina.webdriver.locator.Context;
+import ebay.carina.components.common.FilterBase;
+import ebay.carina.locatorenums.SortOptions;
+import ebay.carina.pages.common.LoginPageBase;
 import ebay.carina.pages.common.ProductListingPageBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -18,14 +22,24 @@ import java.util.List;
 public class ProductListingPage extends ProductListingPageBase {
     private final static Logger LOGGER = LoggerFactory.getLogger(ProductListingPage.class);
 
+    @FindBy(className = "srp-results")
+    private ExtendedWebElement divResults;
+
+    @Context(dependsOn = "divResults")
+    @FindBy(className = "s-item__details")
+    private List<ExtendedWebElement> divProductDetails;
+
     @FindBy(xpath = "//div[@id = 'srp-river-results']//span[@role = 'heading']")
     private List<ExtendedWebElement> productNameLbls;
 
     @FindBy(className = "srp-save-null-search__heading")
     private ExtendedWebElement noProductFoundLbl;
 
-    @FindBy(xpath = "//div[@id='srp-river-results']//span[@class='s-item__price']")
-    private List<ExtendedWebElement> priceLbls;
+    @FindBy(xpath = "//span[text() = '%s']/span")
+    ExtendedWebElement activeCategory;
+
+    @FindBy(xpath = "//button[text() = 'Save this search']")
+    ExtendedWebElement btnSaveSearch;
 
     public ProductListingPage(WebDriver driver) {
         super(driver);
@@ -55,13 +69,13 @@ public class ProductListingPage extends ProductListingPageBase {
     }
 
     public boolean isCategoryActive(String category) {
-        ExtendedWebElement activeCategory = findExtendedWebElement(By.xpath(String.format("//span[text() = '%s']/span", category)));
-        return activeCategory.getText().contains("Selected category");
+        return activeCategory.format(category).getText().contains("Selected category");
     }
 
     public List<BigDecimal> getProductPrices() {
         List<BigDecimal> prices = new LinkedList<>();
-        for (ExtendedWebElement priceLbl : priceLbls) {
+        for (ExtendedWebElement detailsDiv : divProductDetails) {
+            ExtendedWebElement priceLbl = detailsDiv.findExtendedWebElement(By.className("s-item__price"));
             LOGGER.info("Price:" + priceLbl.getText());
             String price = priceLbl.getText().trim();
 
@@ -74,5 +88,63 @@ public class ProductListingPage extends ProductListingPageBase {
         }
 
         return prices;
+    }
+
+    public List<BigDecimal> getProductPricesWithShipping() {
+        List<BigDecimal> prices = new LinkedList<>();
+        for (ExtendedWebElement detailsDiv : divProductDetails) {
+            ExtendedWebElement priceLbl = detailsDiv.findExtendedWebElement(By.className("s-item__price"));
+            ExtendedWebElement shippingPriceLbl = detailsDiv.findExtendedWebElement(By.className("s-item__shipping"));
+
+            LOGGER.info("Price:" + priceLbl.getText());
+            LOGGER.info("Shipping price:" + shippingPriceLbl.getText());
+
+            String price = priceLbl.getText().trim();
+            String shippingPrice = shippingPriceLbl.getText().trim().replaceAll("[^\\\\d]", "");
+
+            if (price.toLowerCase().contains("to")) {
+                price = price.split(" to ")[0];
+            }
+
+            price = price.replace("$", "");
+            prices.add(new BigDecimal(price).add(new BigDecimal(shippingPrice)));
+        }
+
+        return prices;
+    }
+
+    public LoginPageBase clickSaveSearch() {
+        btnSaveSearch.click();
+        return initPage(driver, LoginPageBase.class);
+    }
+
+    @Override
+    public void clickFilter() {
+        throw new RuntimeException("Page is not implemented yet.");
+    }
+
+    @Override
+    public void validateFreeShipping() {
+        throw new RuntimeException("Not yet implemented");
+    }
+
+    @Override
+    public void selectFilter(String filterName) {
+        throw new RuntimeException("Not yet implemented");
+    }
+
+    @Override
+    public void selectOption(String option) {
+        throw new RuntimeException("Not yet implemented");
+    }
+
+    @Override
+    public FilterBase getFilter() {
+        throw new RuntimeException("Not yet implemented");
+    }
+
+    @Override
+    public void selectSortingOption(SortOptions sortOption) {
+        throw new RuntimeException("Not yet implemented");
     }
 }
