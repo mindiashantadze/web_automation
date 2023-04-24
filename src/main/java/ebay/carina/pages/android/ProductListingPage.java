@@ -142,9 +142,6 @@ public class ProductListingPage extends ProductListingPageBase {
 
             shippingPrice = shippingPrice.replaceAll("[^\\d.]", "");
 
-            LOGGER.info("FORMATTED PRICE: " + price);
-            LOGGER.info("FORMATTED SHIPPING: " + shippingPrice);
-
             price = price.replaceAll("[^\\d.]", "");
 
             prices.add(new BigDecimal(price).add(new BigDecimal(shippingPrice)));
