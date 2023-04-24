@@ -13,13 +13,6 @@ public class FilterDesktop extends FilterBase {
     @FindBy(xpath = "//button[@title='Submit price range']")
     private ExtendedWebElement btnShowResults;
 
-    @FindBy(id = "gh-cat")
-    private ExtendedWebElement categoryOptions;
-
-    @Context(dependsOn = "categoryOptions")
-    @FindBy(xpath = "//option[normalize-space() = '%s']")
-    private ExtendedWebElement categoryOption;
-
     @FindBy(xpath = "(//div[@class = 'price-range'])[1]//input")
     private ExtendedWebElement inptMinPrice;
 
@@ -31,12 +24,6 @@ public class FilterDesktop extends FilterBase {
 
     public FilterDesktop(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
-    }
-
-    @Override
-    public void selectCategory(String category) {
-        categoryOptions.click();
-        categoryOption.format(category).click();
     }
 
     @Override
@@ -54,6 +41,4 @@ public class FilterDesktop extends FilterBase {
     public void submitPriceRange() {
         btnSubmitPriceRange.click();
     }
-
-
 }

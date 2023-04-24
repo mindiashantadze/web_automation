@@ -42,10 +42,10 @@ public class ProductListingPage extends ProductListingPageBase {
     private FilterDesktop filterDesktop;
 
     @FindBy(xpath = "//span[text() = '%s']/span")
-    ExtendedWebElement activeCategory;
+    private ExtendedWebElement activeCategory;
 
     @FindBy(xpath = "//button[text() = 'Save this search']")
-    ExtendedWebElement btnSaveSearch;
+    private ExtendedWebElement btnSaveSearch;
 
     @FindBy(className = "srp-sort")
     private ExtendedWebElement btnSortOptions;
@@ -59,6 +59,14 @@ public class ProductListingPage extends ProductListingPageBase {
 
     @FindBy(xpath = "//ul[@class = 'fake-menu__items']//span[text() = '%s']")
     private ExtendedWebElement filterOption;
+
+
+    @FindBy(id = "gh-cat")
+    private ExtendedWebElement categoryOptions;
+
+    @Context(dependsOn = "categoryOptions")
+    @FindBy(xpath = "//option[normalize-space() = '%s']")
+    private ExtendedWebElement categoryOption;
 
     public ProductListingPage(WebDriver driver) {
         super(driver);
@@ -175,8 +183,9 @@ public class ProductListingPage extends ProductListingPageBase {
     }
 
     @Override
-    public void clickFilter() {
-        filterButton.click();
+    public void selectCategory(String category) {
+        categoryOptions.click();
+        categoryOption.format(category).click();
     }
 
     @Override

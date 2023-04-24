@@ -17,17 +17,14 @@ public class FilterMobile extends FilterBase {
     @FindBy(xpath = "//span[@class = 'filter__label' and text() = '%s']")
     ExtendedWebElement filterOption;
 
-    @FindBy(xpath = "//div[@id = 'c4-filter-spoke']//span[text() = '%s']")
-    ExtendedWebElement categoryOption;
+    @FindBy(xpath = "(//div[@class = 'price-range'])[1]//input")
+    private ExtendedWebElement inptMinPrice;
 
-    @FindBy(id = "c4-filter-spoke-1-7-8-textbox")
-    ExtendedWebElement inptMinPrice;
+    @FindBy(xpath = "(//div[@class = 'price-range'])[2]//input")
+    private ExtendedWebElement inptMaxPrice;
 
-    @FindBy(id = "c4-filter-spoke-1-7-10-textbox")
-    ExtendedWebElement inptMaxPrice;
-
-    @FindBy(id = "9")
-    ExtendedWebElement btnShowResults;
+    @FindBy(xpath ="//div[@class = 'srp-controls__default-refinements  clearfix']//button[@class = 'icon-btn']")
+    private ExtendedWebElement btnFilter;
 
     public FilterMobile(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
@@ -38,12 +35,8 @@ public class FilterMobile extends FilterBase {
     }
 
     @Override
-    public void selectCategory(String category) {
-        categoryOption.format(category).click();
-    }
-
-    @Override
     public void typeMinPrice(BigDecimal minPrice) {
+        btnFilter.clickByJs();
         inptMinPrice.type(minPrice.toString());
     }
 
@@ -52,12 +45,11 @@ public class FilterMobile extends FilterBase {
         inptMaxPrice.type(maxPrice.toString());
     }
 
+    @FindBy(className = "x-textrange__button")
+    private ExtendedWebElement btnSubmitPriceRange;
+
     @Override
     public void submitPriceRange() {
 
-    }
-
-    private void submitFilter() {
-        btnShowResults.click();
     }
 }

@@ -10,7 +10,6 @@ public abstract class FilterBase extends AbstractUIObject {
     public FilterBase(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
     }
-    public abstract void selectCategory(String category);
     public abstract void typeMinPrice(BigDecimal minPrice);
     public abstract void typeMaxPrice(BigDecimal maxPrice);
     public abstract void submitPriceRange();

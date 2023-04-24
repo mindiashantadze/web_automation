@@ -59,9 +59,9 @@ public class SearchTest implements IAbstractTest {
         homePage.open();
         homePage.getSearchSection().typeInSearchField("Ball");
         final String category = "Music";
-        homePage.getSearchSection().selectCategory(category);
         homePage.getSearchSection().clickSearchButton();
         ProductListingPageBase plp = initPage(driver, ProductListingPageBase.class);
+        plp.selectCategory(category);
         Assert.assertTrue(plp.isCategoryActive(category), "Category is not active");
     }
 
@@ -89,13 +89,13 @@ public class SearchTest implements IAbstractTest {
 
     @Test
     public void sortingProductsTest() {
-        WebDriver driver = getDriver();
-        HomePageBase homePage = initPage(driver, HomePageBase.class);
+        HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
         homePage.open();
         homePage.getSearchSection().typeInSearchField("Ball");
         homePage.getSearchSection().clickSearchButton();
-        ProductListingPageBase plp = initPage(driver, ProductListingPageBase.class);
+        ProductListingPageBase plp = initPage(getDriver(), ProductListingPageBase.class);
         plp.selectSortingOption(SortOptions.PriceAsc);
+        plp = initPage(getDriver(), ProductListingPageBase.class);
         List<BigDecimal> prices = plp.getProductPricesWithShipping();
         for (int i = 1; i < prices.size(); i++) {
             BigDecimal previousPrice = prices.get(i - 1);
