@@ -36,7 +36,6 @@ public class FilterMobile extends FilterBase {
 
     @Override
     public void typeMinPrice(BigDecimal minPrice) {
-        btnFilter.clickByJs();
         inptMinPrice.type(minPrice.toString());
     }
 
@@ -51,5 +50,10 @@ public class FilterMobile extends FilterBase {
     @Override
     public void submitPriceRange() {
 
+    }
+
+    @Override
+    public void clickFilterBtn() {
+        btnFilter.click();
     }
 }

@@ -73,6 +73,7 @@ public class SearchTest implements IAbstractTest {
         homePage.getSearchSection().typeInSearchField("Ball");
         homePage.getSearchSection().clickSearchButton();
         ProductListingPageBase plp = initPage(driver, ProductListingPageBase.class);
+        plp.getFilter().clickFilterBtn();
         BigDecimal enteredMinPrice = new BigDecimal(20);
         BigDecimal enteredMaxPrice = new BigDecimal(50);
         plp.getFilter().typeMinPrice(enteredMinPrice);

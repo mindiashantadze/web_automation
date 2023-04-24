@@ -13,4 +13,6 @@ public abstract class FilterBase extends AbstractUIObject {
     public abstract void typeMinPrice(BigDecimal minPrice);
     public abstract void typeMaxPrice(BigDecimal maxPrice);
     public abstract void submitPriceRange();
+
+    public abstract void clickFilterBtn();
 }

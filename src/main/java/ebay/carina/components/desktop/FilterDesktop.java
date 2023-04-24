@@ -41,4 +41,9 @@ public class FilterDesktop extends FilterBase {
     public void submitPriceRange() {
         btnSubmitPriceRange.click();
     }
+
+    @Override
+    public void clickFilterBtn() {
+
+    }
 }
