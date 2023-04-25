@@ -3,7 +3,6 @@ package ebay.carina.components.desktop;
 import com.zebrunner.carina.utils.factory.ICustomTypePageFactory;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import ebay.carina.components.common.SearchBase;
-import ebay.carina.pages.common.AdvancedSearchPageBase;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
@@ -42,11 +41,5 @@ public class SearchDesktop extends SearchBase implements ICustomTypePageFactory 
     public void selectCategory(String categoryName) {
         categoriesDropDown.click();
         categoryOption.format(categoryName).click();
-    }
-
-    @Override
-    public AdvancedSearchPageBase goToAdvancedSearchPage() {
-        advancedBtn.click();
-        return initPage(driver, AdvancedSearchPageBase.class);
     }
 }
