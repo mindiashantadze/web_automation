@@ -2,7 +2,7 @@ package ebay.carina.pages.desktop;
 
 import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
-import ebay.carina.locatorenums.KeyWordOptions;
+import ebay.carina.utils.locatorenums.KeyWordOptions;
 import ebay.carina.pages.common.AdvancedSearchPageBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

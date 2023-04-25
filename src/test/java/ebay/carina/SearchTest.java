@@ -1,8 +1,10 @@
 package ebay.carina;
 
 import com.qaprosoft.carina.core.foundation.IAbstractTest;
-import ebay.carina.locatorenums.SortOptions;
+import ebay.carina.utils.context.MobileContextUtils;
+import ebay.carina.utils.locatorenums.SortOptions;
 import ebay.carina.pages.common.*;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -116,5 +118,28 @@ public class SearchTest implements IAbstractTest {
         plp.selectFilter("Shipping");
         plp.selectOption("Free International Shipping");
         plp.validateFreeShipping();
+    }
+
+    @Test
+    public void mobileNoProductsFoundTest() {
+        WebDriver driver = getDriver();
+        HomePageBase homePage = initPage(driver, HomePageBase.class);
+        homePage.open();
+        homePage.getSearchSection().typeInSearchField("somenonexistingproduct");
+
+        // demo context switch for task 2
+        MobileContextUtils contextUtils = new MobileContextUtils();
+        contextUtils.switchMobileContext(MobileContextUtils.View.NATIVE, null);
+        driver.findElement(By.id("com.android.chrome:id/menu_button")).click();
+        driver.findElement(By.xpath("//*[@content-desc = 'New tab']")).click();
+        driver.findElement(By.id("com.android.chrome:id/tab_switcher_button")).click();
+        driver.findElement(By.xpath("//android.widget.ImageView[@content-desc='Close New tab tab']")).click();
+        driver.findElement(By.xpath("//*[@resource-id = 'com.android.chrome:id/tab_thumbnail']")).click();
+
+        // asserting the product search result
+        contextUtils.switchMobileContext(MobileContextUtils.View.WEB_CHROME, null);
+        homePage.getSearchSection().clickSearchButton();
+        ProductListingPageBase plp = initPage(driver, ProductListingPageBase.class);
+        Assert.assertEquals(plp.getNoProductFoundLbl(), PRODUCTS_NOT_FOUND_MSG, "Message should say that no matches were found");
     }
 }

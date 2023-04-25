@@ -3,7 +3,7 @@ package ebay.carina.pages.common;
 import com.zebrunner.carina.webdriver.decorator.PageOpeningStrategy;
 import com.zebrunner.carina.webdriver.gui.AbstractPage;
 import ebay.carina.components.common.FilterBase;
-import ebay.carina.locatorenums.SortOptions;
+import ebay.carina.utils.locatorenums.SortOptions;
 import org.openqa.selenium.WebDriver;
 
 import java.math.BigDecimal;

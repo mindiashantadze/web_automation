@@ -5,7 +5,7 @@ import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.locator.Context;
 import ebay.carina.components.android.FilterMobile;
 import ebay.carina.components.common.FilterBase;
-import ebay.carina.locatorenums.SortOptions;
+import ebay.carina.utils.locatorenums.SortOptions;
 import ebay.carina.pages.common.LoginPageBase;
 import ebay.carina.pages.common.ProductListingPageBase;
 import org.openqa.selenium.By;

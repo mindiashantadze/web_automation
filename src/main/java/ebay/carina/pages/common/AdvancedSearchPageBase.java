@@ -1,7 +1,7 @@
 package ebay.carina.pages.common;
 
 import com.zebrunner.carina.webdriver.gui.AbstractPage;
-import ebay.carina.locatorenums.KeyWordOptions;
+import ebay.carina.utils.locatorenums.KeyWordOptions;
 import org.openqa.selenium.WebDriver;
 
 import java.math.BigDecimal;
