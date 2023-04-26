@@ -6,6 +6,8 @@ import ebay.carina.utils.locatorenums.SortOptions;
 import ebay.carina.pages.common.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
