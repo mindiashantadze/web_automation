@@ -2,16 +2,13 @@ package ebay.carina.pages.ios;
 
 import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
-import com.zebrunner.carina.webdriver.decorator.PageOpeningStrategy;
 import com.zebrunner.carina.webdriver.locator.Context;
 import ebay.carina.components.common.FilterBase;
-import ebay.carina.components.desktop.FilterDesktop;
 import ebay.carina.pages.common.LoginPageBase;
 import ebay.carina.pages.common.ProductListingPageBase;
 import ebay.carina.utils.locatorenums.SortOptions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
@@ -40,13 +37,10 @@ public class ProductListingPage extends ProductListingPageBase {
     @FindBy(xpath = "//div[@id='srp-river-results']//span[@class='s-item__price']")
     private List<ExtendedWebElement> priceLbls;
 
-    @FindBy(id = "s0-51-16-0-1-2-6")
-    private FilterDesktop filterDesktop;
-
     @FindBy(xpath = "//span[text() = '%s']/span")
     private ExtendedWebElement activeCategory;
 
-    @FindBy(xpath = "//button[text() = 'Save this search']")
+    @FindBy(xpath = "//span[text() = 'Save this search']")
     private ExtendedWebElement btnSaveSearch;
 
     @FindBy(className = "srp-sort")
@@ -56,37 +50,39 @@ public class ProductListingPage extends ProductListingPageBase {
     @FindBy(xpath = "//a//span[text() = '%s']")
     private ExtendedWebElement btnSortOption;
 
-    @FindBy(xpath = "//div[@id = 's0-51-16-5-4[0]']//span[text()='%s']")
+    @FindBy(xpath = "(//button[text() = 'Filter'])[1]")
     private ExtendedWebElement filterButton;
 
-    @FindBy(xpath = "//ul[@class = 'fake-menu__items']//span[text() = '%s']")
+    @FindBy(xpath = "//div[@class = 'filter__hub__content']//span[text() = '%s']")
     private ExtendedWebElement filterOption;
 
-
-    @FindBy(id = "gh-cat")
-    private ExtendedWebElement categoryOptions;
-
-    @Context(dependsOn = "categoryOptions")
-    @FindBy(xpath = "//option[normalize-space() = '%s']")
+    @FindBy(xpath = "//ul[@id = 'c4-filter-spoke-1-2']//span[text() = 'Music']")
     private ExtendedWebElement categoryOption;
 
-    @FindBy(className = "s-progressive-spinner")
-    private ExtendedWebElement loader;
+    @FindBy(xpath = "//div[@class = 'filter__submit']//button[text() = 'Show 8,800,000+ results']")
+    private ExtendedWebElement showResultsBtn;
 
     public ProductListingPage(WebDriver driver) {
         super(driver);
         setUiLoadedMarker(divResults);
+        // uiloadedmarker didn't work fos IOS
+        pause(3);
     }
 
     @Override
     public String getNoProductFoundLbl() {
-        return null;
+        return noProductFoundLbl.getText().trim();
     }
 
     @Override
     public boolean isCategoryActive(String category) {
-        return false;
+        filterButton.click();
+        filterOption.format("Category").click();
+        LOGGER.info(categoryOption.format(category).getAttribute("class"));
+        return categoryOption.format(category).getAttribute("class").contains("BOLD");
     }
+
+
 
     @Override
     public List<BigDecimal> getProductPrices() {
@@ -118,12 +114,16 @@ public class ProductListingPage extends ProductListingPageBase {
 
     @Override
     public LoginPageBase clickSaveSearch() {
-        return null;
+        btnSaveSearch.click();
+        return initPage(driver, LoginPageBase.class);
     }
 
     @Override
     public void selectCategory(String category) {
-
+        filterButton.click();
+        filterOption.format("Category").click();
+        categoryOption.format(category).click();
+        showResultsBtn.clickByJs();
     }
 
     @Override

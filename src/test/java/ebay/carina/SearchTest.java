@@ -27,8 +27,6 @@ public class SearchTest implements IAbstractTest {
         homePage.open();
         homePage.getSearchSection().typeInSearchField("Ball");
         homePage.getSearchSection().clickSearchButton();
-        // uiloadedmarker didn't work fos IOS
-        pause(3);
         ProductListingPageBase plp = initPage(driver, ProductListingPageBase.class);
         plp.validateProductName("Ball");
     }
