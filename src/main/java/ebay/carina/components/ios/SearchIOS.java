@@ -1,12 +1,15 @@
 package ebay.carina.components.ios;
 
+import com.zebrunner.carina.utils.factory.ICustomTypePageFactory;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import ebay.carina.components.common.SearchBase;
+import ebay.carina.pages.common.ProductListingPageBase;
+import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
-public class SearchIOS extends SearchBase {
+public class SearchIOS extends SearchBase implements ICustomTypePageFactory {
     @FindBy(className = "gh-search__input")
     private ExtendedWebElement inptSearchField;
 
@@ -29,8 +32,9 @@ public class SearchIOS extends SearchBase {
     }
 
     @Override
-    public void clickSearchButton() {
+    public ProductListingPageBase clickSearchButton() {
         btnSearch.click();
+        return initPage(driver, ProductListingPageBase.class);
     }
 
     @Override

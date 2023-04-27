@@ -10,9 +10,8 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public abstract class ProductListingPageBase extends AbstractPage {
-    protected ProductListingPageBase(WebDriver driver) {
+    public ProductListingPageBase(WebDriver driver) {
         super(driver);
-        setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
     }
 
     public abstract String getNoProductFoundLbl();

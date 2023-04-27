@@ -1,10 +1,12 @@
 package ebay.carina.pages.ios;
 
+import com.zebrunner.carina.utils.factory.DeviceType;
 import ebay.carina.pages.common.CategoriesPageBase;
 import org.openqa.selenium.WebDriver;
 
+@DeviceType(pageType = DeviceType.Type.IOS_PHONE, parentClass = CategoriesPageBase.class)
 public class CategoriesPage extends CategoriesPageBase {
-    protected CategoriesPage(WebDriver driver) {
+    public CategoriesPage(WebDriver driver) {
         super(driver);
     }
 

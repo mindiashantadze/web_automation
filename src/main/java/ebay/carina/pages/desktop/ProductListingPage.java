@@ -23,11 +23,12 @@ import java.util.List;
 public class ProductListingPage extends ProductListingPageBase {
     private final static Logger LOGGER = LoggerFactory.getLogger(ProductListingPage.class);
 
-    @FindBy(xpath = "//div[@id = 'srp-river-results']//span[@role = 'heading']")
-    private List<ExtendedWebElement> productNameLbls;
-
     @FindBy(className = "srp-results")
     private ExtendedWebElement divResults;
+
+    @Context(dependsOn = "divResults")
+    @FindBy(xpath = "//span[@role = 'heading']")
+    private List<ExtendedWebElement> productNameLbls;
 
     @Context(dependsOn = "divResults")
     @FindBy(className = "s-item__details")

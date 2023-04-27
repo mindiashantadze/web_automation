@@ -1,7 +1,6 @@
 package ebay.carina.pages.ios;
 
 import com.zebrunner.carina.utils.factory.DeviceType;
-import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import ebay.carina.components.common.SearchBase;
 import ebay.carina.components.ios.SearchIOS;
 import ebay.carina.pages.common.HomePageBase;
@@ -10,7 +9,7 @@ import org.openqa.selenium.support.FindBy;
 
 @DeviceType(pageType = DeviceType.Type.IOS_PHONE, parentClass = HomePageBase.class)
 public class HomePage extends HomePageBase {
-    @FindBy(className = "globalHeaderWrapper")
+    @FindBy(id = "globalHeaderWrapper")
     private SearchIOS searchIos;
 
     public HomePage(WebDriver driver) {

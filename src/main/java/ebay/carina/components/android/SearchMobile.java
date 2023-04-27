@@ -3,6 +3,8 @@ package ebay.carina.components.android;
 import com.zebrunner.carina.utils.factory.ICustomTypePageFactory;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import ebay.carina.components.common.SearchBase;
+import ebay.carina.pages.android.ProductListingPage;
+import ebay.carina.pages.common.ProductListingPageBase;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
@@ -34,8 +36,9 @@ public class SearchMobile extends SearchBase implements ICustomTypePageFactory {
     }
 
     @Override
-    public void clickSearchButton() {
+    public ProductListingPageBase clickSearchButton() {
         btnSearchProducts.click();
+        return initPage(driver, ProductListingPage.class);
     }
 
     @Override

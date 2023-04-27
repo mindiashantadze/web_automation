@@ -6,8 +6,6 @@ import ebay.carina.utils.locatorenums.SortOptions;
 import ebay.carina.pages.common.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
@@ -29,6 +27,8 @@ public class SearchTest implements IAbstractTest {
         homePage.open();
         homePage.getSearchSection().typeInSearchField("Ball");
         homePage.getSearchSection().clickSearchButton();
+        // uiloadedmarker didn't work fos IOS
+        pause(3);
         ProductListingPageBase plp = initPage(driver, ProductListingPageBase.class);
         plp.validateProductName("Ball");
     }
@@ -39,8 +39,7 @@ public class SearchTest implements IAbstractTest {
         HomePageBase homePage = initPage(driver, HomePageBase.class);
         homePage.open();
         homePage.getSearchSection().typeInSearchField("Ball");
-        homePage.getSearchSection().clickSearchButton();
-        ProductListingPageBase plp = initPage(driver, ProductListingPageBase.class);
+        ProductListingPageBase plp = homePage.getSearchSection().clickSearchButton();
         LoginPageBase loginPage = plp.clickSaveSearch();
         Assert.assertEquals(loginPage.getSignInMessage(), SIGNIN_PAGE_MSG);
     }
