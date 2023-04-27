@@ -63,6 +63,7 @@ public class SearchTest implements IAbstractTest {
         homePage.getSearchSection().clickSearchButton();
         ProductListingPageBase plp = initPage(driver, ProductListingPageBase.class);
         plp.selectCategory(category);
+        plp = initPage(driver, ProductListingPageBase.class);
         Assert.assertTrue(plp.isCategoryActive(category), "Category is not active");
     }
 

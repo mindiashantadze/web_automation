@@ -59,7 +59,7 @@ public class ProductListingPage extends ProductListingPageBase {
     @FindBy(xpath = "//ul[@id = 'c4-filter-spoke-1-2']//span[text() = 'Music']")
     private ExtendedWebElement categoryOption;
 
-    @FindBy(xpath = "//div[@class = 'filter__submit']//button[text() = 'Show 8,800,000+ results']")
+    @FindBy(xpath = "//div[@class = 'filter__submit']//button")
     private ExtendedWebElement showResultsBtn;
 
     public ProductListingPage(WebDriver driver) {
@@ -123,6 +123,7 @@ public class ProductListingPage extends ProductListingPageBase {
         filterButton.click();
         filterOption.format("Category").click();
         categoryOption.format(category).click();
+        pause(3);
         showResultsBtn.clickByJs();
     }
 
