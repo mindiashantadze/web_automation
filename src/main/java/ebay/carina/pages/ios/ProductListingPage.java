@@ -67,6 +67,9 @@ public class ProductListingPage extends ProductListingPageBase {
     @FindBy(className = "srp-multi-aspect-guidance--hide-separators")
     private FilterIOS filter;
 
+    @FindBy(xpath = "//label[text() = 'Free International Shipping']")
+    private ExtendedWebElement freeShippingOption;
+
     public ProductListingPage(WebDriver driver) {
         super(driver);
         setUiLoadedMarker(divResults);
@@ -187,11 +190,14 @@ public class ProductListingPage extends ProductListingPageBase {
     public void selectFreeShippingOption() {
         filterButton.click();
         filterOption.format("Shipping Options").click();
+        freeShippingOption.click();
+        pause(4);
+        showResultsBtn.click();
     }
 
     @Override
     public void selectOption(String option) {
-        filterOption.format(option).click();
+        // filterOption.format(option).click();
     }
 
     @Override

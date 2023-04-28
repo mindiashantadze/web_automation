@@ -120,7 +120,7 @@ public class SearchTest implements IAbstractTest {
         ProductListingPageBase plp = initPage(driver, ProductListingPageBase.class);
         plp.selectFreeShippingOption();
         plp.selectOption("Free International Shipping");
-        plp = initPage(driver, ProductListingPageBase.class);
+        pause(3);
         plp.validateFreeShipping();
     }
 
