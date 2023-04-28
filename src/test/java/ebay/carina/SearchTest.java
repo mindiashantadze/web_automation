@@ -81,6 +81,7 @@ public class SearchTest implements IAbstractTest {
         plp.getFilter().typeMinPrice(enteredMinPrice);
         plp.getFilter().typeMaxPrice(enteredMaxPrice);
         plp.getFilter().submitPriceRange();
+        pause(3);
         List<BigDecimal> prices = plp.getProductPrices();
         for (BigDecimal price : prices) {
             Assert.assertTrue(

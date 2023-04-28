@@ -4,9 +4,11 @@ import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.locator.Context;
 import ebay.carina.components.common.FilterBase;
+import ebay.carina.components.ios.FilterIOS;
 import ebay.carina.pages.common.LoginPageBase;
 import ebay.carina.pages.common.ProductListingPageBase;
 import ebay.carina.utils.locatorenums.SortOptions;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.slf4j.Logger;
@@ -14,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 
 import java.math.BigDecimal;
+import java.util.LinkedList;
 import java.util.List;
 
 @DeviceType(pageType = DeviceType.Type.IOS_PHONE, parentClass = ProductListingPageBase.class)
@@ -62,6 +65,9 @@ public class ProductListingPage extends ProductListingPageBase {
     @FindBy(xpath = "//div[@class = 'filter__submit']//button")
     private ExtendedWebElement showResultsBtn;
 
+    @FindBy(className = "srp-multi-aspect-guidance--hide-separators")
+    private FilterIOS filter;
+
     public ProductListingPage(WebDriver driver) {
         super(driver);
         setUiLoadedMarker(divResults);
@@ -82,11 +88,23 @@ public class ProductListingPage extends ProductListingPageBase {
         return categoryOption.format(category).getAttribute("class").contains("BOLD");
     }
 
-
-
     @Override
     public List<BigDecimal> getProductPrices() {
-        return null;
+        List<BigDecimal> prices = new LinkedList<>();
+        for (ExtendedWebElement detailsDiv : divProductDetails) {
+            ExtendedWebElement priceLbl = detailsDiv.findExtendedWebElement(By.className("s-item__price"));
+            LOGGER.info("Price:" + priceLbl.getText());
+            String price = priceLbl.getText().trim();
+
+            if (price.toLowerCase().contains("to")) {
+                price = price.split(" to ")[0];
+            }
+
+            price = price.replace("$", "");
+            prices.add(new BigDecimal(price));
+        }
+
+        return prices;
     }
 
     @Override
@@ -144,7 +162,7 @@ public class ProductListingPage extends ProductListingPageBase {
 
     @Override
     public FilterBase getFilter() {
-        return null;
+        return filter;
     }
 
     @Override
