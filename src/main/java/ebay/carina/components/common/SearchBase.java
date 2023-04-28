@@ -11,6 +11,6 @@ public abstract class SearchBase extends AbstractUIObject {
     }
 
     public abstract void typeInSearchField(String productName);
-    public abstract ProductListingPageBase clickSearchButton();
+    public abstract void clickSearchButton();
     public abstract void selectCategory(String categoryName);
 }

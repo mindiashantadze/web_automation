@@ -36,9 +36,8 @@ public class SearchMobile extends SearchBase implements ICustomTypePageFactory {
     }
 
     @Override
-    public ProductListingPageBase clickSearchButton() {
+    public void clickSearchButton() {
         btnSearchProducts.click();
-        return initPage(driver, ProductListingPage.class);
     }
 
     @Override

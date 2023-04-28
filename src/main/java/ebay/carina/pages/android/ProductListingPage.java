@@ -165,7 +165,7 @@ public class ProductListingPage extends ProductListingPageBase {
     }
 
     @Override
-    public void selectFilter(String filterName) {
+    public void selectFreeShippingOption() {
     }
 
     @Override

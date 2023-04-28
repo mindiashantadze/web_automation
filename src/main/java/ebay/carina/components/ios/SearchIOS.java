@@ -32,9 +32,8 @@ public class SearchIOS extends SearchBase implements ICustomTypePageFactory {
     }
 
     @Override
-    public ProductListingPageBase clickSearchButton() {
+    public void clickSearchButton() {
         btnSearch.click();
-        return initPage(driver, ProductListingPageBase.class);
     }
 
     @Override

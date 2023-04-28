@@ -34,9 +34,8 @@ public class SearchDesktop extends SearchBase implements ICustomTypePageFactory 
     }
 
     @Override
-    public ProductListingPageBase clickSearchButton() {
+    public void clickSearchButton() {
         btnSearchProducts.click();
-        return initPage(driver, ProductListingPageBase.class);
     }
 
     @Override

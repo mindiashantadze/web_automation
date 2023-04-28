@@ -23,7 +23,7 @@ public abstract class ProductListingPageBase extends AbstractPage {
     public abstract LoginPageBase clickSaveSearch();
     public abstract void selectCategory(String category);
     public abstract void validateFreeShipping();
-    public abstract void selectFilter(String filterName);
+    public abstract void selectFreeShippingOption();
     public abstract void selectOption(String option);
     public abstract FilterBase getFilter();
     public abstract void selectSortingOption(SortOptions sortOption);

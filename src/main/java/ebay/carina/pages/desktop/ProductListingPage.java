@@ -73,8 +73,8 @@ public class ProductListingPage extends ProductListingPageBase {
         super(driver);
     }
 
-    public void selectFilter(String filterName) {
-        filterButton.format(filterName).clickByJs();
+    public void selectFreeShippingOption() {
+        filterButton.format("Shipping").clickByJs();
     }
 
     public void selectOption(String option) {

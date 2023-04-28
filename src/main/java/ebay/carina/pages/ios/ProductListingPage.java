@@ -46,17 +46,16 @@ public class ProductListingPage extends ProductListingPageBase {
     @FindBy(xpath = "//span[text() = 'Save this search']")
     private ExtendedWebElement btnSaveSearch;
 
-    @FindBy(className = "srp-sort")
+    @FindBy(xpath = "//button[contains(@class, 'srp-controls__control--link-enabled btn') and contains(text(), 'Sort')]")
     private ExtendedWebElement btnSortOptions;
 
-    @Context(dependsOn = "btnSortOptions")
-    @FindBy(xpath = "//a//span[text() = '%s']")
+    @FindBy(xpath = "//span[@class = 's-sort-label' and text() = '%s']")
     private ExtendedWebElement btnSortOption;
 
     @FindBy(xpath = "(//button[text() = 'Filter'])[1]")
     private ExtendedWebElement filterButton;
 
-    @FindBy(xpath = "//div[@class = 'filter__hub__content']//span[text() = '%s']")
+    @FindBy(xpath = "//span[text() = '%s']")
     private ExtendedWebElement filterOption;
 
     @FindBy(xpath = "//ul[@id = 'c4-filter-spoke-1-2']//span[text() = 'Music']")
@@ -109,7 +108,37 @@ public class ProductListingPage extends ProductListingPageBase {
 
     @Override
     public List<BigDecimal> getProductPricesWithShipping() {
-        return null;
+        List<BigDecimal> prices = new LinkedList<>();
+        for (ExtendedWebElement detailsDiv : divProductDetails) {
+            ExtendedWebElement priceLbl = detailsDiv.findExtendedWebElement(By.className("s-item__price"));
+            ExtendedWebElement shippingPriceLbl = detailsDiv.findExtendedWebElement(By.className("s-item__shipping"));
+
+            LOGGER.info("Price:" + priceLbl.getText());
+            LOGGER.info("Shipping price:" + shippingPriceLbl.getText());
+
+            String price = priceLbl.getText().trim();
+            String shippingPrice = shippingPriceLbl.getText().trim();
+
+            if (shippingPrice.equals("Shipping not specified")) {
+                continue;
+            }
+
+            if (shippingPrice.equals("Free International Shipping")) {
+                shippingPrice = "0.00";
+            }
+
+            if (price.toLowerCase().contains("to")) {
+                price = price.split(" to ")[0];
+            }
+
+            shippingPrice = shippingPrice.replaceAll("[^\\d.]", "");
+
+            price = price.replaceAll("[^\\d.]", "");
+
+            prices.add(new BigDecimal(price).add(new BigDecimal(shippingPrice)));
+        }
+
+        return prices;
     }
 
     @Override
@@ -142,22 +171,27 @@ public class ProductListingPage extends ProductListingPageBase {
         filterOption.format("Category").click();
         categoryOption.format(category).click();
         pause(3);
-        showResultsBtn.clickByJs();
+        showResultsBtn.click();
     }
 
     @Override
     public void validateFreeShipping() {
-
+        for (ExtendedWebElement detailsDiv : divProductDetails) {
+            ExtendedWebElement priceLbl = detailsDiv.findExtendedWebElement(By.className("s-item__shipping"));
+            LOGGER.info("Shipping price: " + priceLbl.getText());
+            Assert.assertEquals(priceLbl.getText().trim(), "Free International Shipping");
+        }
     }
 
     @Override
-    public void selectFilter(String filterName) {
-
+    public void selectFreeShippingOption() {
+        filterButton.click();
+        filterOption.format("Shipping Options").click();
     }
 
     @Override
     public void selectOption(String option) {
-
+        filterOption.format(option).click();
     }
 
     @Override
@@ -167,6 +201,7 @@ public class ProductListingPage extends ProductListingPageBase {
 
     @Override
     public void selectSortingOption(SortOptions sortOption) {
-
+        btnSortOptions.click();
+        btnSortOption.format(sortOption.getSortOption()).click();
     }
 }
