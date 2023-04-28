@@ -125,7 +125,7 @@ public class SearchTest implements IAbstractTest {
     }
 
     @Test
-    public void mobileNoProductsFoundTest() {
+    public void androidNoProductsFoundTest() {
         WebDriver driver = getDriver();
         HomePageBase homePage = initPage(driver, HomePageBase.class);
         homePage.open();
