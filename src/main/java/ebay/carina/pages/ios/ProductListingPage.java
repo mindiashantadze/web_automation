@@ -12,6 +12,7 @@ import ebay.carina.utils.locatorenums.SortOptions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
@@ -78,6 +79,10 @@ public class ProductListingPage extends ProductListingPageBase {
         pause(3);
     }
 
+    private void waitForProducts() {
+        waitUntil(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.className("s-item__details")), 10);
+    }
+
     @Override
     public String getNoProductFoundLbl() {
         return noProductFoundLbl.getText().trim();
@@ -93,6 +98,7 @@ public class ProductListingPage extends ProductListingPageBase {
 
     @Override
     public List<BigDecimal> getProductPrices() {
+        waitForProducts();
         List<BigDecimal> prices = new LinkedList<>();
         for (ExtendedWebElement detailsDiv : divProductDetails) {
             ExtendedWebElement priceLbl = detailsDiv.findExtendedWebElement(By.className("s-item__price"));
@@ -112,6 +118,7 @@ public class ProductListingPage extends ProductListingPageBase {
 
     @Override
     public List<BigDecimal> getProductPricesWithShipping() {
+        waitForProducts();
         List<BigDecimal> prices = new LinkedList<>();
         for (ExtendedWebElement detailsDiv : divProductDetails) {
             ExtendedWebElement priceLbl = detailsDiv.findExtendedWebElement(By.className("s-item__price"));
@@ -147,6 +154,7 @@ public class ProductListingPage extends ProductListingPageBase {
 
     @Override
     public void validateProductName(String productName) {
+        waitForProducts();
         for (ExtendedWebElement productNameLbl : productNameLbls) {
             LOGGER.info("Product name: " + productNameLbl.getText());
             String productNameText = productNameLbl.getText().toLowerCase().trim();
@@ -156,6 +164,7 @@ public class ProductListingPage extends ProductListingPageBase {
 
     @Override
     public void validateProductName(String productName, String excludedWords) {
+        waitForProducts();
         for (ExtendedWebElement productNameLbl : productNameLbls) {
             LOGGER.info(productNameLbl.getText());
             String productNameText = productNameLbl.getText().toLowerCase().trim();
@@ -172,7 +181,7 @@ public class ProductListingPage extends ProductListingPageBase {
     @Override
     public void selectCategory(String category) {
         filterButton.click();
-        filterOption.format("Category").click();
+        filterOption.format(FilterOptions.CATEGORY.getFilterOptions()).click();
         categoryOption.format(category).click();
         pause(3);
         showResultsBtn.click();
@@ -180,6 +189,7 @@ public class ProductListingPage extends ProductListingPageBase {
 
     @Override
     public void validateFreeShipping() {
+        waitForProducts();
         for (ExtendedWebElement detailsDiv : divProductDetails) {
             ExtendedWebElement priceLbl = detailsDiv.findExtendedWebElement(By.className("s-item__shipping"));
             LOGGER.info("Shipping price: " + priceLbl.getText());

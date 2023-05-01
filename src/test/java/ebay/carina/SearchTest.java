@@ -36,6 +36,7 @@ public class SearchTest implements IAbstractTest {
         HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
         homePage.open();
         homePage.getSearchSection().typeInSearchField("Ball");
+        homePage.getSearchSection().clickSearchButton();
         ProductListingPageBase plp = initPage(getDriver(), ProductListingPageBase.class);;
         LoginPageBase loginPage = plp.clickSaveSearch();
         Assert.assertEquals(loginPage.getSignInMessage(), SIGNIN_PAGE_MSG);
@@ -77,7 +78,6 @@ public class SearchTest implements IAbstractTest {
         plp.getFilter().typeMinPrice(enteredMinPrice);
         plp.getFilter().typeMaxPrice(enteredMaxPrice);
         plp.getFilter().submitPriceRange();
-        pause(3);
         List<BigDecimal> prices = plp.getProductPrices();
         for (BigDecimal price : prices) {
             Assert.assertTrue(
@@ -93,10 +93,8 @@ public class SearchTest implements IAbstractTest {
         homePage.open();
         homePage.getSearchSection().typeInSearchField("Ball");
         homePage.getSearchSection().clickSearchButton();
-        pause(3);
         ProductListingPageBase plp = initPage(getDriver(), ProductListingPageBase.class);
         plp.selectSortingOption(SortOptions.PriceAsc);
-        pause(3);
         plp = initPage(getDriver(), ProductListingPageBase.class);
         List<BigDecimal> prices = plp.getProductPricesWithShipping();
         for (int i = 1; i < prices.size(); i++) {
@@ -115,7 +113,6 @@ public class SearchTest implements IAbstractTest {
         ProductListingPageBase plp = initPage(getDriver(), ProductListingPageBase.class);
         plp.selectFreeShippingOption();
         plp.selectOption(FilterOptions.FREE_SHIPPING);
-        pause(3);
         plp.validateFreeShipping();
     }
 
