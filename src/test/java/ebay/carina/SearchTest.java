@@ -2,6 +2,7 @@ package ebay.carina;
 
 import com.qaprosoft.carina.core.foundation.IAbstractTest;
 import ebay.carina.utils.context.MobileContextUtils;
+import ebay.carina.utils.locatorenums.FilterOptions;
 import ebay.carina.utils.locatorenums.SortOptions;
 import ebay.carina.pages.common.*;
 import org.openqa.selenium.By;
@@ -22,59 +23,54 @@ public class SearchTest implements IAbstractTest {
 
     @Test
     public void searchTest() {
-        WebDriver driver = getDriver();
-        HomePageBase homePage = initPage(driver, HomePageBase.class);
+        HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
         homePage.open();
         homePage.getSearchSection().typeInSearchField("Ball");
         homePage.getSearchSection().clickSearchButton();
-        ProductListingPageBase plp = initPage(driver, ProductListingPageBase.class);
+        ProductListingPageBase plp = initPage(getDriver(), ProductListingPageBase.class);
         plp.validateProductName("Ball");
     }
 
     @Test
     public void saveSearchTest() {
-        WebDriver driver = getDriver();
-        HomePageBase homePage = initPage(driver, HomePageBase.class);
+        HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
         homePage.open();
         homePage.getSearchSection().typeInSearchField("Ball");
-        ProductListingPageBase plp = initPage(driver, ProductListingPageBase.class);;
+        ProductListingPageBase plp = initPage(getDriver(), ProductListingPageBase.class);;
         LoginPageBase loginPage = plp.clickSaveSearch();
         Assert.assertEquals(loginPage.getSignInMessage(), SIGNIN_PAGE_MSG);
     }
 
     @Test
     public void noProductsFoundTest() {
-        WebDriver driver = getDriver();
-        HomePageBase homePage = initPage(driver, HomePageBase.class);
+        HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
         homePage.open();
         homePage.getSearchSection().typeInSearchField("somenonexistingproduct");
         homePage.getSearchSection().clickSearchButton();
-        ProductListingPageBase plp = initPage(driver, ProductListingPageBase.class);
+        ProductListingPageBase plp = initPage(getDriver(), ProductListingPageBase.class);
         Assert.assertEquals(plp.getNoProductFoundLbl(), PRODUCTS_NOT_FOUND_MSG, "Message should say that no matches were found");
     }
 
     @Test
     public void searchWithCategoriesTest() {
-        WebDriver driver = getDriver();
-        HomePageBase homePage = initPage(driver, HomePageBase.class);
+        HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
         homePage.open();
         homePage.getSearchSection().typeInSearchField("Ball");
         final String category = "Music";
         homePage.getSearchSection().clickSearchButton();
-        ProductListingPageBase plp = initPage(driver, ProductListingPageBase.class);
+        ProductListingPageBase plp = initPage(getDriver(), ProductListingPageBase.class);
         plp.selectCategory(category);
-        plp = initPage(driver, ProductListingPageBase.class);
+        plp = initPage(getDriver(), ProductListingPageBase.class);
         Assert.assertTrue(plp.isCategoryActive(category), "Category is not active");
     }
 
     @Test
     public void priceRangeTest() {
-        WebDriver driver = getDriver();
-        HomePageBase homePage = initPage(driver, HomePageBase.class);
+        HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
         homePage.open();
         homePage.getSearchSection().typeInSearchField("Ball");
         homePage.getSearchSection().clickSearchButton();
-        ProductListingPageBase plp = initPage(driver, ProductListingPageBase.class);
+        ProductListingPageBase plp = initPage(getDriver(), ProductListingPageBase.class);
         plp.getFilter().clickFilterBtn();
         BigDecimal enteredMinPrice = new BigDecimal(20);
         BigDecimal enteredMaxPrice = new BigDecimal(50);
@@ -112,14 +108,13 @@ public class SearchTest implements IAbstractTest {
 
     @Test
     public void freeShippingTest() {
-        WebDriver driver = getDriver();
-        HomePageBase homePage = initPage(driver, HomePageBase.class);
+        HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
         homePage.open();
         homePage.getSearchSection().typeInSearchField("Ball");
         homePage.getSearchSection().clickSearchButton();
-        ProductListingPageBase plp = initPage(driver, ProductListingPageBase.class);
+        ProductListingPageBase plp = initPage(getDriver(), ProductListingPageBase.class);
         plp.selectFreeShippingOption();
-        plp.selectOption("Free International Shipping");
+        plp.selectOption(FilterOptions.FREE_SHIPPING);
         pause(3);
         plp.validateFreeShipping();
     }

@@ -5,6 +5,7 @@ import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.locator.Context;
 import ebay.carina.components.common.FilterBase;
 import ebay.carina.components.desktop.FilterDesktop;
+import ebay.carina.utils.locatorenums.FilterOptions;
 import ebay.carina.utils.locatorenums.SortOptions;
 import ebay.carina.pages.common.LoginPageBase;
 import ebay.carina.pages.common.ProductListingPageBase;
@@ -39,7 +40,7 @@ public class ProductListingPage extends ProductListingPageBase {
     @FindBy(xpath = "//div[@id='srp-river-results']//span[@class='s-item__price']")
     private List<ExtendedWebElement> priceLbls;
 
-    @FindBy(id = "s0-51-16-0-1-2-6")
+    @FindBy(className = "x-refine__body")
     private FilterDesktop filterDesktop;
 
     @FindBy(xpath = "//span[text() = '%s']/span")
@@ -74,11 +75,11 @@ public class ProductListingPage extends ProductListingPageBase {
     }
 
     public void selectFreeShippingOption() {
-        filterButton.format("Shipping").clickByJs();
+        filterButton.format(FilterOptions.SHIPPING.getFilterOptions()).clickByJs();
     }
 
-    public void selectOption(String option) {
-        filterOption.format(option).clickByJs();
+    public void selectOption(FilterOptions option) {
+        filterOption.format(option.getFilterOptions()).clickByJs();
     }
 
     public void validateProductName(String productName) {

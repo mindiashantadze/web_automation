@@ -6,10 +6,14 @@ import ebay.carina.components.common.FilterBase;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
 
 public class FilterMobile extends FilterBase {
+    private final static Logger LOGGER = LoggerFactory.getLogger(FilterMobile.class);
+
     @FindBy(className = "filter__hub__content")
     private ExtendedWebElement filterOptions;
 
@@ -49,7 +53,7 @@ public class FilterMobile extends FilterBase {
 
     @Override
     public void submitPriceRange() {
-
+        LOGGER.info("submitPriceRange function is not implemented for Android platform");
     }
 
     @Override

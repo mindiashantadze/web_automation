@@ -7,6 +7,7 @@ import ebay.carina.components.common.FilterBase;
 import ebay.carina.components.ios.FilterIOS;
 import ebay.carina.pages.common.LoginPageBase;
 import ebay.carina.pages.common.ProductListingPageBase;
+import ebay.carina.utils.locatorenums.FilterOptions;
 import ebay.carina.utils.locatorenums.SortOptions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -196,8 +197,8 @@ public class ProductListingPage extends ProductListingPageBase {
     }
 
     @Override
-    public void selectOption(String option) {
-        // filterOption.format(option).click();
+    public void selectOption(FilterOptions option) {
+        LOGGER.info("Method is not required for IOS");
     }
 
     @Override

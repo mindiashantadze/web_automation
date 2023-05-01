@@ -2,6 +2,7 @@ package ebay.carina.components.ios;
 
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import ebay.carina.components.common.FilterBase;
+import ebay.carina.utils.locatorenums.FilterOptions;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
@@ -12,10 +13,10 @@ public class FilterIOS extends FilterBase {
     @FindBy(xpath = "//span[@class = 'srp-multi-aspect__flyout__btn-label' and text() = '%s']")
     private ExtendedWebElement filterOption;
 
-    @FindBy(id = "s0-17-23-6-3-4[0]-3-1-13-9[1]-0-0-2-flyout-7-5-4-9-10-textbox")
+    @FindBy(xpath = "//input[@aria-label='Minimum Value']")
     private ExtendedWebElement inptMinPrice;
 
-    @FindBy(id = "s0-17-23-6-3-4[0]-3-1-13-9[1]-0-0-2-flyout-7-5-4-9-13-textbox")
+    @FindBy(xpath = "//input[@aria-label='Maximum Value']")
     private ExtendedWebElement inptMaxPrice;
 
     @FindBy(className = "srp-multi-aspect__price-range__submit")
@@ -25,8 +26,8 @@ public class FilterIOS extends FilterBase {
         super(driver, searchContext);
     }
 
-    private void selectFilter(String filterOption) {
-        this.filterOption.format(filterOption).click();
+    private void selectFilter(FilterOptions filterOption) {
+        this.filterOption.format(filterOption.getFilterOptions()).click();
     }
 
     @Override
@@ -46,6 +47,6 @@ public class FilterIOS extends FilterBase {
 
     @Override
     public void clickFilterBtn() {
-        selectFilter("Price");
+        selectFilter(FilterOptions.PRICE);
     }
 }

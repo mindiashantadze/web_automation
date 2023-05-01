@@ -3,6 +3,7 @@ package ebay.carina.pages.common;
 import com.zebrunner.carina.webdriver.decorator.PageOpeningStrategy;
 import com.zebrunner.carina.webdriver.gui.AbstractPage;
 import ebay.carina.components.common.FilterBase;
+import ebay.carina.utils.locatorenums.FilterOptions;
 import ebay.carina.utils.locatorenums.SortOptions;
 import org.openqa.selenium.WebDriver;
 
@@ -24,7 +25,7 @@ public abstract class ProductListingPageBase extends AbstractPage {
     public abstract void selectCategory(String category);
     public abstract void validateFreeShipping();
     public abstract void selectFreeShippingOption();
-    public abstract void selectOption(String option);
+    public abstract void selectOption(FilterOptions option);
     public abstract FilterBase getFilter();
     public abstract void selectSortingOption(SortOptions sortOption);
 }

@@ -5,6 +5,7 @@ import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.locator.Context;
 import ebay.carina.components.android.FilterMobile;
 import ebay.carina.components.common.FilterBase;
+import ebay.carina.utils.locatorenums.FilterOptions;
 import ebay.carina.utils.locatorenums.SortOptions;
 import ebay.carina.pages.common.LoginPageBase;
 import ebay.carina.pages.common.ProductListingPageBase;
@@ -166,11 +167,12 @@ public class ProductListingPage extends ProductListingPageBase {
 
     @Override
     public void selectFreeShippingOption() {
+        LOGGER.info("Step is not required for android phones");
     }
 
     @Override
-    public void selectOption(String option) {
-        filterOption.format(option).clickByJs();
+    public void selectOption(FilterOptions option) {
+        filterOption.format(option.getFilterOptions()).clickByJs();
     }
 
     @Override
