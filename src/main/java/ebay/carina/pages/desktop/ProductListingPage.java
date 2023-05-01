@@ -5,6 +5,7 @@ import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.locator.Context;
 import ebay.carina.components.common.FilterBase;
 import ebay.carina.components.desktop.FilterDesktop;
+import ebay.carina.utils.locatorenums.CategoryOption;
 import ebay.carina.utils.locatorenums.FilterOptions;
 import ebay.carina.utils.locatorenums.SortOptions;
 import ebay.carina.pages.common.LoginPageBase;
@@ -185,9 +186,9 @@ public class ProductListingPage extends ProductListingPageBase {
     }
 
     @Override
-    public void selectCategory(String category) {
+    public void selectCategory(CategoryOption category) {
         categoryOptions.click();
-        categoryOption.format(category).click();
+        categoryOption.format(category.getCategory()).click();
     }
 
     @Override

@@ -2,6 +2,7 @@ package ebay.carina;
 
 import com.qaprosoft.carina.core.foundation.IAbstractTest;
 import ebay.carina.utils.context.MobileContextUtils;
+import ebay.carina.utils.locatorenums.CategoryOption;
 import ebay.carina.utils.locatorenums.FilterOptions;
 import ebay.carina.utils.locatorenums.SortOptions;
 import ebay.carina.pages.common.*;
@@ -59,7 +60,7 @@ public class SearchTest implements IAbstractTest {
         final String category = "Music";
         homePage.getSearchSection().clickSearchButton();
         ProductListingPageBase plp = initPage(getDriver(), ProductListingPageBase.class);
-        plp.selectCategory(category);
+        plp.selectCategory(CategoryOption.MUSIC);
         plp = initPage(getDriver(), ProductListingPageBase.class);
         Assert.assertTrue(plp.isCategoryActive(category), "Category is not active");
     }

@@ -5,6 +5,7 @@ import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.locator.Context;
 import ebay.carina.components.android.FilterMobile;
 import ebay.carina.components.common.FilterBase;
+import ebay.carina.utils.locatorenums.CategoryOption;
 import ebay.carina.utils.locatorenums.FilterOptions;
 import ebay.carina.utils.locatorenums.SortOptions;
 import ebay.carina.pages.common.LoginPageBase;
@@ -191,10 +192,10 @@ public class ProductListingPage extends ProductListingPageBase {
     }
 
     @Override
-    public void selectCategory(String category) {
+    public void selectCategory(CategoryOption category) {
         btnCategories.click();
-        categoryOption.format("Show More").clickByJs();
-        categoryOption.format(category).clickByJs();
+        categoryOption.format(CategoryOption.SHOW_MORE.getCategory()).clickByJs();
+        categoryOption.format(category.getCategory()).clickByJs();
     }
 
     @Override

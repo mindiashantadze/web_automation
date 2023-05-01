@@ -7,6 +7,7 @@ import ebay.carina.components.common.FilterBase;
 import ebay.carina.components.ios.FilterIOS;
 import ebay.carina.pages.common.LoginPageBase;
 import ebay.carina.pages.common.ProductListingPageBase;
+import ebay.carina.utils.locatorenums.CategoryOption;
 import ebay.carina.utils.locatorenums.FilterOptions;
 import ebay.carina.utils.locatorenums.SortOptions;
 import org.openqa.selenium.By;
@@ -177,10 +178,10 @@ public class ProductListingPage extends ProductListingPageBase {
     }
 
     @Override
-    public void selectCategory(String category) {
+    public void selectCategory(CategoryOption category) {
         filterButton.click();
         filterOption.format(FilterOptions.CATEGORY.getFilterOptions()).click();
-        categoryOption.format(category).click();
+        categoryOption.format(category.getCategory()).click();
         pause(3);
         showResultsBtn.click();
     }
