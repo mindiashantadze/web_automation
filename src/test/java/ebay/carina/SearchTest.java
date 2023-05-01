@@ -5,7 +5,6 @@ import ebay.carina.utils.context.MobileContextUtils;
 import ebay.carina.utils.locatorenums.FilterOptions;
 import ebay.carina.utils.locatorenums.SortOptions;
 import ebay.carina.pages.common.*;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -126,11 +125,13 @@ public class SearchTest implements IAbstractTest {
         // demo context switch for task 2
         MobileContextUtils contextUtils = new MobileContextUtils();
         contextUtils.switchMobileContext(MobileContextUtils.View.NATIVE, null);
-        driver.findElement(By.id("com.android.chrome:id/menu_button")).click();
-        driver.findElement(By.xpath("//*[@content-desc = 'New tab']")).click();
-        driver.findElement(By.id("com.android.chrome:id/tab_switcher_button")).click();
-        driver.findElement(By.xpath("//android.widget.ImageView[@content-desc='Close New tab tab']")).click();
-        driver.findElement(By.xpath("//*[@resource-id = 'com.android.chrome:id/tab_thumbnail']")).click();
+        NativePageBase nativePageBase = initPage(getDriver(), NativePageBase.class);
+
+        nativePageBase.clickMenu();
+        nativePageBase.clickNewTab();
+        nativePageBase.clickTabSwitcher();
+        nativePageBase.clickCloseTab();
+        nativePageBase.clickTabThumbnail();
 
         // asserting the product search result
         contextUtils.switchMobileContext(MobileContextUtils.View.WEB_CHROME, null);

@@ -40,11 +40,13 @@ public class FilterMobile extends FilterBase {
 
     @Override
     public void typeMinPrice(BigDecimal minPrice) {
+        inptMinPrice.clickByJs();
         inptMinPrice.type(minPrice.toString());
     }
 
     @Override
     public void typeMaxPrice(BigDecimal maxPrice) {
+        inptMaxPrice.clickByJs();
         inptMaxPrice.type(maxPrice.toString());
     }
 
@@ -53,7 +55,7 @@ public class FilterMobile extends FilterBase {
 
     @Override
     public void submitPriceRange() {
-        LOGGER.info("submitPriceRange function is not implemented for Android platform");
+        btnSubmitPriceRange.click();
     }
 
     @Override

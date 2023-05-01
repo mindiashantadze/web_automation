@@ -75,8 +75,6 @@ public class ProductListingPage extends ProductListingPageBase {
     public ProductListingPage(WebDriver driver) {
         super(driver);
         setUiLoadedMarker(divResults);
-        // uiloadedmarker didn't work fos IOS
-        pause(3);
     }
 
     private void waitForProducts() {

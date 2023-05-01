@@ -25,7 +25,7 @@ import java.util.List;
 public class ProductListingPage extends ProductListingPageBase {
     private final static Logger LOGGER = LoggerFactory.getLogger(ProductListingPage.class);
 
-    @FindBy(className = "srp-results")
+    @FindBy(xpath = "//ul[contains(@class, 'srp-results')]")
     private ExtendedWebElement divResults;
 
     @Context(dependsOn = "divResults")
@@ -33,7 +33,7 @@ public class ProductListingPage extends ProductListingPageBase {
     private List<ExtendedWebElement> divProductDetails;
 
     @Context(dependsOn = "divResults")
-    @FindBy(xpath = "//span[@role = 'heading']")
+    @FindBy(xpath = "//ul[contains(@class, 'srp-re')]//span[@role = 'heading']")
     private List<ExtendedWebElement> productNameLbls;
 
     @FindBy(className = "srp-save-null-search__heading")
@@ -72,7 +72,12 @@ public class ProductListingPage extends ProductListingPageBase {
         setUiLoadedMarker(divResults);
     }
 
+    private void waitForProducts() {
+        waitUntil(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.className("s-item__details")), 10);
+    }
+
     public void validateProductName(String productName) {
+        waitForProducts();
         for (ExtendedWebElement productNameLbl : productNameLbls) {
             LOGGER.info(productNameLbl.getText());
             String productNameText = productNameLbl.getText().toLowerCase().trim();
@@ -81,6 +86,7 @@ public class ProductListingPage extends ProductListingPageBase {
     }
 
     public void validateProductName(String productName, String excludedWords) {
+        waitForProducts();
         for (ExtendedWebElement productNameLbl : productNameLbls) {
             LOGGER.info(productNameLbl.getText());
             String productNameText = productNameLbl.getText().toLowerCase().trim();
@@ -101,6 +107,7 @@ public class ProductListingPage extends ProductListingPageBase {
     }
 
     public List<BigDecimal> getProductPrices() {
+        waitForProducts();
         List<BigDecimal> prices = new LinkedList<>();
         for (ExtendedWebElement detailsDiv : divProductDetails) {
             ExtendedWebElement priceLbl = detailsDiv.findExtendedWebElement(By.className("s-item__price"));
@@ -119,6 +126,7 @@ public class ProductListingPage extends ProductListingPageBase {
     }
 
     public List<BigDecimal> getProductPricesWithShipping() {
+        waitForProducts();
         List<BigDecimal> prices = new LinkedList<>();
         for (ExtendedWebElement detailsDiv : divProductDetails) {
             ExtendedWebElement priceLbl = detailsDiv.findExtendedWebElement(By.className("s-item__price"));
@@ -159,6 +167,7 @@ public class ProductListingPage extends ProductListingPageBase {
 
     @Override
     public void validateFreeShipping() {
+        waitForProducts();
         for (ExtendedWebElement detailsDiv : divProductDetails) {
             ExtendedWebElement priceLbl = detailsDiv.findExtendedWebElement(By.className("s-item__shipping"));
             LOGGER.info("Shipping price: " + priceLbl.getText());
