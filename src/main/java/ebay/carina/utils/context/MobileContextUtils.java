@@ -1,8 +1,8 @@
 package ebay.carina.utils.context;
 
+import com.zebrunner.carina.utils.Configuration;
 import com.zebrunner.carina.webdriver.DriverHelper;
 import com.zebrunner.carina.webdriver.IDriverPool;
-import ebay.carina.pages.android.ProductListingPage;
 import io.appium.java_client.remote.SupportsContextSwitching;
 import org.openqa.selenium.ContextAware;
 import org.openqa.selenium.NotFoundException;
@@ -42,7 +42,8 @@ public class MobileContextUtils implements IDriverPool {
 
     public enum View {
         NATIVE("NATIVE_APP"),
-        WEB_CHROME("CHROMIUM");
+        WEB_CHROME("CHROMIUM"),
+        WEB_SAFARI("WEBVIEW_");
 
         String viewName;
 

@@ -1,6 +1,7 @@
 package ebay.carina;
 
 import com.qaprosoft.carina.core.foundation.IAbstractTest;
+import com.zebrunner.carina.utils.R;
 import ebay.carina.utils.context.MobileContextUtils;
 import ebay.carina.utils.locatorenums.CategoryOption;
 import ebay.carina.utils.locatorenums.FilterOptions;
@@ -135,7 +136,12 @@ public class SearchTest implements IAbstractTest {
         nativePageBase.clickTabThumbnail();
 
         // asserting the product search result
-        contextUtils.switchMobileContext(MobileContextUtils.View.WEB_CHROME, null);
+        String browserName = R.CONFIG.get("capabilities.browserName");
+        if (browserName.equals("chrome")) {
+            contextUtils.switchMobileContext(MobileContextUtils.View.WEB_CHROME, null);
+        } else if (browserName.equals("safari")) {
+            contextUtils.switchMobileContext(MobileContextUtils.View.WEB_SAFARI, null);
+        }
         homePage.getSearchSection().clickSearchButton();
         ProductListingPageBase plp = initPage(driver, ProductListingPageBase.class);
         Assert.assertEquals(plp.getNoProductFoundLbl(), PRODUCTS_NOT_FOUND_MSG, "Message should say that no matches were found");
