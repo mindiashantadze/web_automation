@@ -123,6 +123,7 @@ public class SearchTest implements IAbstractTest {
         HomePageBase homePage = initPage(driver, HomePageBase.class);
         homePage.open();
         homePage.getSearchSection().typeInSearchField("somenonexistingproduct");
+        homePage.getSearchSection().clickSearchButton();
 
         // demo context switch for task 2
         MobileContextUtils contextUtils = new MobileContextUtils();
@@ -142,7 +143,6 @@ public class SearchTest implements IAbstractTest {
         } else if (browserName.equals("safari")) {
             contextUtils.switchMobileContext(MobileContextUtils.View.WEB_SAFARI, null);
         }
-        homePage.getSearchSection().clickSearchButton();
         ProductListingPageBase plp = initPage(driver, ProductListingPageBase.class);
         Assert.assertEquals(plp.getNoProductFoundLbl(), PRODUCTS_NOT_FOUND_MSG, "Message should say that no matches were found");
     }
