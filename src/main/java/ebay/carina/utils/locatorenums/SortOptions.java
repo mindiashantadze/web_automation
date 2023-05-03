@@ -9,7 +9,7 @@ public enum SortOptions {
     Distance("Distance: nearest first");
 
     private final String sortOption;
-    SortOptions(String sortOption) {
+    private SortOptions(String sortOption) {
         this.sortOption = sortOption;
     }
 

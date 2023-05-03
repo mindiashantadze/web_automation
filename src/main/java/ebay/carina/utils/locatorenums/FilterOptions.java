@@ -11,7 +11,7 @@ public enum FilterOptions {
 
     private final String filterOption;
 
-    FilterOptions(String filterOption) {
+    private FilterOptions(String filterOption) {
         this.filterOption = filterOption;
     }
 
