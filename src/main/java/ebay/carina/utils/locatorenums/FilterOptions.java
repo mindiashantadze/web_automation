@@ -7,10 +7,9 @@ public enum FilterOptions {
     SORT("Sort"),
     BUYING_FORMAT("Buying Format"),
     SHIPPING("Shipping"),
-    FREE_SHIPPING("Free International Shipping"),
-    ;
+    FREE_SHIPPING("Free International Shipping");
 
-    String filterOption = "";
+    private final String filterOption;
 
     FilterOptions(String filterOption) {
         this.filterOption = filterOption;

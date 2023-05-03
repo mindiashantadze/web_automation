@@ -8,7 +8,7 @@ public enum SortOptions {
     PriceDesc("Price + Shipping: highest first"),
     Distance("Distance: nearest first");
 
-    private String sortOption;
+    private final String sortOption;
     SortOptions(String sortOption) {
         this.sortOption = sortOption;
     }
