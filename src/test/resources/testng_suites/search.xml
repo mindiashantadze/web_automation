@@ -4,7 +4,6 @@
     <parameter name="suiteOwner" value="mshantadze" />
     <parameter name="jenkinsJobName" value="carina-demo" />
     <parameter name="jenkinsJobType" value="api" />
-    <parameter name="jenkinsEmail" value="qps-auto@zebrunner.com" />
     <parameter name="jenkinsEnvironment" value="DEMO" />
 
     <test name="Search">
