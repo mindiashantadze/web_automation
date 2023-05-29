@@ -4,7 +4,7 @@ public enum CategoryOption {
     MUSIC("Music"),
     SHOW_MORE("Show More");
     private final String category;
-    CategoryOption(String category) {
+    private CategoryOption(String category) {
         this.category = category;
     }
 
