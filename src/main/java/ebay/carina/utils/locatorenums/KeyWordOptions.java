@@ -1,4 +1,4 @@
-package ebay.carina.locatorenums;
+package ebay.carina.utils.locatorenums;
 
 public enum KeyWordOptions {
     AllWordsAnyOrder("All words, any order"),
@@ -8,7 +8,7 @@ public enum KeyWordOptions {
 
     private final String keyWordOptions;
 
-    KeyWordOptions(String keyWordOptions) {
+    private KeyWordOptions(String keyWordOptions) {
         this.keyWordOptions = keyWordOptions;
     }
 
