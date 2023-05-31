@@ -5,7 +5,7 @@
     <parameter name="jenkinsJobName" value="Search-Test" />
     <parameter name="jenkinsJobType" value="web" />
     <parameter name="jenkinsEnvironment" value="DEMO" />
-    <parameter name="jenkinsRegressionPipeline" value="firefox chrome"/>
+    <parameter name="jenkinsRegressionPipeline" value="firefox, chrome"/>
 
     <test name="Search">
         <classes>
