@@ -13,5 +13,5 @@
         <classes>
             <class name="ebay.carina.SearchTest" />
         </classes>
-    </test>
+    </test>	
 </suite>
