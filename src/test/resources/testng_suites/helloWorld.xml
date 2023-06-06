@@ -5,6 +5,7 @@
     <parameter name="jenkinsJobName" value="Search-Test" />
     <parameter name="jenkinsJobType" value="web" />
     <parameter name="jenkinsEnvironment" value="DEMO" />
+    <parameter name="provider" value="selenium">
     <parameter name="jenkinsRegressionPipeline" value="Browser regression pipeline"/>
     <parameter name="jenkinsRegressionMatrix" value="browserName: chrome; browserName: firefox"></parameter>
 
