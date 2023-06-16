@@ -91,6 +91,12 @@
 			<artifactId>postgresql</artifactId>
 			<version>42.5.3</version>
 		</dependency>
+		<dependency>
+			<groupId>com.zebrunner</groupId>
+			<artifactId>agent-testng</artifactId>
+			<version>1.9.6</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
