@@ -44,16 +44,6 @@
 		</dependency>
 		<dependency>
 			<groupId>com.zebrunner</groupId>
-			<artifactId>carina-dataprovider</artifactId>
-			<version>${carina-dataprovider.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.zebrunner</groupId>
-			<artifactId>carina-api</artifactId>
-			<version>${carina-api.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.zebrunner</groupId>
 			<artifactId>carina-aws-s3</artifactId>
 			<version>${carina-aws-s3.version}</version>
 		</dependency>
@@ -91,13 +81,8 @@
 			<artifactId>postgresql</artifactId>
 			<version>42.5.3</version>
 		</dependency>
-		<dependency>
-			<groupId>com.zebrunner</groupId>
-			<artifactId>agent-testng</artifactId>
-			<version>1.9.6</version>
-			<scope>test</scope>
-		</dependency>
 	</dependencies>
+
 
 	<build>
 		<plugins>
