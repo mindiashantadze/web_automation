@@ -3,6 +3,7 @@ package ebay.carina.pages.android;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import ebay.carina.pages.common.LoginPageBase;
+import ebay.carina.utils.web_processor.WebElementProcessor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
@@ -16,6 +17,6 @@ public class LoginPage extends LoginPageBase {
     }
 
     public String getSignInMessage() {
-        return lblSignInMessage.getText().trim();
+        return WebElementProcessor.getText(lblSignInMessage);
     }
 }
